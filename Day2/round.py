@@ -1,0 +1,6 @@
+print(90/7)
+print(round(90/7))
+print(round(90/7,3))
+print(round(90/7,(-1)))
+print(round(90/7,0))
+print(round(90/7,1))
