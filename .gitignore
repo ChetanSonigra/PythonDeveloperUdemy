@@ -1,1 +1,19 @@
 .vs/
+# .gitignore
+
+# Virtual environment
+venv/
+.env
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Media files
+media/
+
+# Database files
+*.db
+*.sqlite3
+__pycache__/
+migrations/

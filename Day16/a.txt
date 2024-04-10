@@ -1,0 +1,11 @@
+TO create a virtualenv
+1. pip install virtualenv
+2. virtualenv v_name  
+creates virtual environment with name v_name
+3. .\p1\Scripts\activate
+To activate a virtual environment
+4. deactivate
+To deactivate a virtual environment
+
+
+# pip freeze to check all library and their version installed.

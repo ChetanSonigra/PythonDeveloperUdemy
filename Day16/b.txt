@@ -1,0 +1,75 @@
+1. pip install django # in virtual environment
+2. create a different folder for project in same directory as virtual environment.
+3. django-admin startproject project_name
+   # this will start project in folder created in step 2.
+   # this will have manage.py, project_name folder with (asgi.py,settings.py, urls.py, wsgi.py, __init__.py)
+4. python manage.py runserver
+   # this will start the server
+   # creates db.sqlite3 in same directory as manage.py
+   # this will give url to open website.
+   # url/admin will give admin panel,but first need to do migrations to db.sqlite3.
+
+5. python manage.py migrate 
+   # to migrate
+
+6. create admin credentials with 'python manage.py createsuperuser'.
+
+7. create app with 'python manage.py startapp app_name' in same folder as manage.py
+   # this will crate a 'app_name' folder with (admin.py, apps.py, models.py, tests.py, views.py, __init__.py)
+
+8. add 'app_name.apps.BaseConfig' in 'INSTALLED_APPS' in settings.py
+   # so project knows about app.
+
+9. create a urls.py in app.  # url configuration.
+   in app/urls.py:
+       from django.urls import path
+       from . import views
+       urlpatterns = [path('',view.view_name,name='view_name')]
+   in project/urs.py:
+       from django.urls import path,include
+       add path('',include('app.urls'))
+   in app/view.py:
+       from django.http import httpResponse
+       def view_name(request):
+           return httpResponse('text')
+
+10. create a model and do migrations.
+    in models.py:
+        from django.contrib.auth.models import User
+        class Model_Name(models.Model)
+    python manage.py make migrations
+    python manage.py migrate
+    in admin.py:
+        from .models import Model_Name
+        admin.site.register(Model_Name)
+        
+11. Setting view.
+    from django.views.generic.list import ListView
+    in view.py:
+        class PendingList(ListView):
+            model = Model
+            context_object_name = 'tasks'
+    create templates/app/xyz.html to create html template for view.
+    register template directory in settings.py
+    
+12. setting DetailView, CreateView, UpdateView, DeleteView
+13. set up a link in html page thorugh {% url 'object' %} where object is name is in urls.py
+14. context_object_name in views.py is used in html page for variables.
+15. from django.urls import reverselazy. it is used to get to any url. like
+    successurl = reverselazy('object') where object is from urls.py
+
+16. create login,logout and username at top in html page with if condition.
+17. create loginview, for logout view use it directly in urls.py and use post request as form in html page
+18. For access restriction, from django.contrib.auth.mixins import LoginRequiredMixin
+19. for user specific date, overwrite get_context_data method in view with filter.
+20. Register new user: get generic view FormView form generic.edit
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+overwrite get method to redirect, form_valid method to login automatically after signup.
+
+21. django front-end part: styling. 
+    {{variable}}
+    {% for x in y %} {% endfor %}
+    {% if task.completed %}{% else %}{% endif %}
+    {{request.user|title}}
+    google fonts, html color codes, html symbols.
